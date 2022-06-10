@@ -5,7 +5,7 @@ public class Urls {
 
     //ENDPOINTS USUARIO
     //IP PABLO
-    public static final String URL_USER = "http://10.241.34.27:8086/app/users/user";
+    public static final String URL_USER = "http://192.168.56.1:8086/app/users/user";
 
     //IP SCHERE
     //public static final String URL_USER = "http://192.168.1.31:8086/app/users/user";
