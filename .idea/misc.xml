@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Pablo/AndroidStudioProjects/Autoregistros/app/src/main/res/layout/fragment_date_of_birth.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Pablo/AndroidStudioProjects/Autoregistros/app/src/main/res/layout/fragment_email.xml" value="0.264" />
+        <entry key="..\:/Users/Pablo/AndroidStudioProjects/Autoregistros/app/src/main/res/layout/fragment_password.xml" value="0.4" />
+        <entry key="..\:/Users/Pablo/AndroidStudioProjects/Autoregistros/app/src/main/res/layout/fragment_username.xml" value="0.4" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/about.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/addemotion.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/calendar.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/graphic.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/perfil.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/radio.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/resources.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/settings.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/side_nav_bar.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/singout.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/sun.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/drawable/time.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/activity_create_user.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/activity_principal.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/activity_update.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/app_bar_main.xml" value="0.264" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/content_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/fragment_calendar.xml" value="0.264" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/fragment_date_of_birth.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/fragment_day.xml" value="0.2" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/fragment_email.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/fragment_graphic.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/fragment_password.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/fragment_resources.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/fragment_username.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Autoregistros/app/src/main/res/menu/main.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/drawable/addemotion.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.124" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/drawable/side_nav_bar.xml" value="0.124" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/layout/activity_create_user.xml" value="0.1082427536231884" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/layout/activity_principal.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/layout/activity_update.xml" value="0.136" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/layout/content_main.xml" value="0.136" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/layout/fragment_date_of_birth.xml" value="0.264" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/layout/fragment_day.xml" value="0.1" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/layout/nav_header_main.xml" value="0.10371376811594203" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/menu/activity_main_drawer.xml" value="0.121875" />
+        <entry key="..\:/Users/X50357RE/Documents/TGF9/TFG/app/src/main/res/menu/main.xml" value="0.121875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
