@@ -28,12 +28,6 @@ public class DayFragment extends Fragment {
         binding = FragmentDayBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        day = root.findViewById(R.id.textDay);
-
-        Calendar calendario = Calendar.getInstance();
-        int day = calendario.get(Calendar.DAY_OF_MONTH + 1);
-        int month = calendario.get(Calendar.MONTH + 1);
-
         return root;
     }
 
