@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.autoregistros.actualizar.Update;
@@ -26,20 +29,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.autoregistros.databinding.ActivityPrincipalBinding;
 
+import java.util.Calendar;
+
 public class Principal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityPrincipalBinding binding;
 
-    public TextView userNavMenu;
-    public TextView emailNavMenu;
+    public TextView userNavMenu, emailNavMenu, dayTxt, dateTxt;
+    public Spinner spinnerEmotions;
     AppBarLayout appBarLayout;
 
-    int id_user;
-    String user_name;
-    String password;
-    String email_address;
-    String date_of_birth;
+    int id_user, day, month, year;
+    String user_name, password, email_address, date_of_birth;
 
 
     @Override
@@ -79,6 +81,26 @@ public class Principal extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        String[] emotion_types = new String[]{"Miedo", "Alegría", "Enfado", "Tristeza", "Asco", "Sorpresa"};
+
+        spinnerEmotions = findViewById(R.id.spinnerDayF);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, emotion_types);
+        spinnerEmotions.setAdapter(spinnerAdapter);
+
+        dayTxt = findViewById(R.id.dayText);
+        dateTxt = findViewById(R.id.dateText);
+
+        Calendar calendario = Calendar.getInstance();
+        day = calendario.get(Calendar.DAY_OF_MONTH);
+        Log.i("DAY", String.valueOf(day));
+        dayTxt.setText(String.valueOf(day));
+
+        month = calendario.get(Calendar.MONTH);
+        Log.i("MONTH", String.valueOf(month + 1));
+        year = calendario.get(Calendar.YEAR);
+        Log.i("YEAR", String.valueOf(year));
+        //dateTxt.setText(month + "/" + year);
 
     }
 
