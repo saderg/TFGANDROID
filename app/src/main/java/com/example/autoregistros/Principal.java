@@ -1,5 +1,7 @@
 package com.example.autoregistros;
 
+import static com.example.autoregistros.conectaAPI.Urls.URL_POST_EMOTION;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -22,13 +25,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.autoregistros.actualizar.Update;
+import com.example.autoregistros.databinding.FragmentCalendarBinding;
 import com.example.autoregistros.entidades.Emotion;
 import com.example.autoregistros.entidades.User;
+import com.example.autoregistros.principal.GraphicFragment;
 import com.example.autoregistros.registro.CreateUser;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -58,6 +64,8 @@ public class Principal extends AppCompatActivity {
     AppBarLayout appBarLayout;
     public FloatingActionButton addEmotion;
 
+    public Bundle bundle;
+
     int id_user, day, month, year;
     String user_name, password, email_address, date_of_birth;
     String emotion_type, emotion_reason;
@@ -73,6 +81,9 @@ public class Principal extends AppCompatActivity {
 
         binding = ActivityPrincipalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //Fragmentos
+        GraphicFragment graphicFragment = new GraphicFragment();
 
         // init components
         userNavMenu = findViewById(R.id.userNavHeader);
@@ -119,7 +130,7 @@ public class Principal extends AppCompatActivity {
 
         Calendar calendario = Calendar.getInstance();
         day = calendario.get(Calendar.DAY_OF_MONTH);
-        Log.i("DAY", String.valueOf(day));
+        Log.i("DDAY", String.valueOf(day));
         dayTxt.setText(String.valueOf(day));
 
         month = calendario.get(Calendar.MONTH);
@@ -146,25 +157,12 @@ public class Principal extends AppCompatActivity {
 
             }
         });
-        
-        switch (navigationView.getId()){
-            case R.id.nav_day:
 
+        bundle = new Bundle();
+        bundle.putInt("id_usuario", id_user);
+        graphicFragment.setArguments(bundle);
 
-                break;
-            case R.id.nav_calendar:
-
-                break;
-            case R.id.nav_graphic:
-
-                break;
-            case R.id.nav_resources:
-
-                break;
-        }
-
-
-        }
+    }
 
 
     @Override
@@ -234,7 +232,7 @@ public class Principal extends AppCompatActivity {
         loading.setCanceledOnTouchOutside(false);
         loading.show();
 
-        String URL = "http://192.168.56.1:8086/app/emotions/create/emotion";
+        String URL = URL_POST_EMOTION;
         JSONObject jsonEmotion = new JSONObject();
         try {
             //metemos los valores en el json

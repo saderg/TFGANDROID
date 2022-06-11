@@ -1,5 +1,6 @@
 package com.example.autoregistros.principal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.autoregistros.Graphics;
 import com.example.autoregistros.R;
 import com.example.autoregistros.databinding.FragmentDayBinding;
 
@@ -29,6 +31,14 @@ public class DayFragment extends Fragment {
         View root = binding.getRoot();
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstance){
+        super.onViewCreated(view, savedInstance);
+
+
+
     }
 
     @Override

@@ -41,7 +41,9 @@ public class Graphics extends AppCompatActivity {
 
         getIntent();
         emotion_date = getIntent().getStringExtra("date");
+        System.out.println("EMOTIONDATE      " + emotion_date);
         id_usuario = getIntent().getIntExtra("id_usuario", 0);
+        System.out.println("ID USUARIO     " + id_usuario);
 
         try {
             start_date = new java.sql.Date(format.parse(emotion_date + "T00:00:00").getTime());
@@ -49,9 +51,6 @@ public class Graphics extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.i("FECHA SELECCIONADA", start_date.toString() + end_date.toString());
-
-        getByRange(id_usuario, start_date, end_date);
 
         //init compoments graphic_day
         BarChart barChart = (BarChart) findViewById(R.id.barChart);
@@ -80,53 +79,5 @@ public class Graphics extends AppCompatActivity {
 
     }
 
-    public void getByRange(int id_usuario, Date start_date, Date end_date){
-        Log.i("START DATE metodo ", start_date.toString());
 
-        ArrayList<Emotion> arrayListEmociones = new ArrayList<>();
-
-        final ProgressDialog loading = new ProgressDialog(Graphics.this);
-        loading.setMessage("Please Wait...");
-        loading.setCanceledOnTouchOutside(false);
-        loading.show();
-
-        String url = URL_GET_EMOTION_FECHA + "?user_id=" + id_usuario + "&start_date=" + start_date.toString() + "T00:00:00&end_date=" + end_date.toString() + "T00:00:00";
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-
-        StringRequest peticionApi = new StringRequest(Request.Method.GET , url,
-                (response -> {
-                    Log.i("TAG", "TODO BIEN");
-
-                    try {
-                        JSONArray arrayEmociones = new JSONArray(response);
-
-                        for (int i = 0; i < arrayEmociones.length(); i++) {
-
-                            loading.dismiss();
-
-                            Emotion emotion = new Emotion();
-
-                            emotion.setId_emocion(arrayEmociones.getJSONObject(i).getInt("id_emocion"));
-                            emotion.setId_usuario(arrayEmociones.getJSONObject(i).getInt("id_usuario"));
-                            emotion.setEmotion_type(arrayEmociones.getJSONObject(i).getString("emotion_type"));
-                            emotion.setEmotion_reason(arrayEmociones.getJSONObject(i).getString("emotion_reason"));
-                            emotion.setEmotion_date(format.parse(arrayEmociones.getJSONObject(i).getString("emotion_date")));
-                            System.out.println(emotion.toString());
-                            arrayListEmociones.add(emotion);
-
-                            Log.i("emotionsMethod" , emotion.toString());
-                        }
-
-                    }catch (Exception ex){
-                        ex.printStackTrace();
-                    }
-                }),
-                (error ->{
-                    Log.e("error", "Error al pedir los datos." + error.getMessage());
-                    loading.dismiss();
-                }));
-        Volley.newRequestQueue(this).add(peticionApi);
-
-    }
 }
