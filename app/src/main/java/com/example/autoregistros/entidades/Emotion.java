@@ -22,6 +22,13 @@ public class Emotion {
 
     }
 
+    public Emotion(Integer id_usuario, String emotion_type, String emotion_reason, Date emotion_date) {
+        this.id_usuario = id_usuario;
+        this.emotion_type = emotion_type;
+        this.emotion_reason = emotion_reason;
+        this.emotion_date = emotion_date;
+    }
+
     public Integer getId_emocion() {
         return id_emocion;
     }
