@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -26,6 +27,12 @@ import com.example.autoregistros.conectaAPI.Methods;
 import com.example.autoregistros.entidades.Emotion;
 import com.example.autoregistros.entidades.User;
 import com.example.autoregistros.registro.CreateUser;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.Utils;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -45,6 +52,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -74,10 +82,17 @@ public class Principal extends AppCompatActivity {
         binding = ActivityPrincipalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // init components
         userNavMenu = findViewById(R.id.userNavHeader);
         emailNavMenu = findViewById(R.id.emailNavHeader);
-
         appBarLayout = findViewById(R.id.appBarLayout);
+
+        //init components fragment_day
+        spinnerEmotions = findViewById(R.id.spinnerDayF);
+        dayTxt = findViewById(R.id.dayText);
+        dateTxt = findViewById(R.id.dateText);
+        reasonEditText = findViewById(R.id.reasonEditText);
+        registrarEmocion = findViewById(R.id.postEmotionButton);
 
         //Recuperar datos del usuario del Main
         getIntent();
@@ -102,15 +117,11 @@ public class Principal extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        //FRAGMENT DAY
         String[] emotion_types = new String[]{"Miedo", "Alegría", "Enfado", "Tristeza", "Asco", "Sorpresa"};
 
-        spinnerEmotions = findViewById(R.id.spinnerDayF);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, emotion_types);
         spinnerEmotions.setAdapter(spinnerAdapter);
-
-        dayTxt = findViewById(R.id.dayText);
-        dateTxt = findViewById(R.id.dateText);
-        reasonEditText = findViewById(R.id.reasonEditText);
 
         Calendar calendario = Calendar.getInstance();
         day = calendario.get(Calendar.DAY_OF_MONTH);
@@ -123,7 +134,6 @@ public class Principal extends AppCompatActivity {
         Log.i("YEAR", String.valueOf(year));
         dateTxt.setText(month + "/" + year);
 
-        registrarEmocion = findViewById(R.id.postEmotionButton);
         registrarEmocion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,6 +152,7 @@ public class Principal extends AppCompatActivity {
 
             }
         });
+
     }
 
     @Override
