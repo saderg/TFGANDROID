@@ -28,4 +28,6 @@ public class GraphicFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 }

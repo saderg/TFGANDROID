@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Autoregistros"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".PruebaGraficos"
+            android:name=".Graphics"
             android:exported="false" />
         <activity
             android:name=".actualizar.Update"

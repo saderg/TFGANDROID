@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                             arrayListaUsuarios.add(user);
                         }
                         if (arrayListaUsuarios != null) {
-                            Intent intent = new Intent(MainActivity.this, PruebaGraficos.class);
+                            Intent intent = new Intent(MainActivity.this, Principal.class);
                             intent.putExtra("id_user", user.getId_usuario());
                             intent.putExtra("user_name" , user.getUser_name());
                             intent.putExtra("password", user.getPassword());
