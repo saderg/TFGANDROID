@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,15 +22,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.autoregistros.actualizar.Update;
-import com.example.autoregistros.conectaAPI.Methods;
 import com.example.autoregistros.entidades.Emotion;
 import com.example.autoregistros.entidades.User;
 import com.example.autoregistros.registro.CreateUser;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -54,10 +52,11 @@ public class Principal extends AppCompatActivity {
     private ActivityPrincipalBinding binding;
 
     public TextView userNavMenu, emailNavMenu, dayTxt, dateTxt;
-    public EditText reasonEditText;
-    public Button registrarEmocion;
+    public EditText reasonEditText, graphicEditText;
     public Spinner spinnerEmotions;
+    public ImageButton graphicButton;
     AppBarLayout appBarLayout;
+    public FloatingActionButton addEmotion;
 
     int id_user, day, month, year;
     String user_name, password, email_address, date_of_birth;
@@ -66,6 +65,7 @@ public class Principal extends AppCompatActivity {
     Emotion emotionPost;
 
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    String[] emotion_types = new String[]{"Miedo", "Alegría", "Enfado", "Tristeza", "Asco"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +74,14 @@ public class Principal extends AppCompatActivity {
         binding = ActivityPrincipalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // init components
         userNavMenu = findViewById(R.id.userNavHeader);
         emailNavMenu = findViewById(R.id.emailNavHeader);
-
         appBarLayout = findViewById(R.id.appBarLayout);
+
+        //init components graphic_day
+        graphicButton = findViewById(R.id.graphic_button);
+        graphicEditText = findViewById(R.id.graphic_edit_text);
 
         //Recuperar datos del usuario del Main
         getIntent();
@@ -102,15 +106,16 @@ public class Principal extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        String[] emotion_types = new String[]{"Miedo", "Alegría", "Enfado", "Tristeza", "Asco", "Sorpresa"};
-
+        //init components fragment_day
         spinnerEmotions = findViewById(R.id.spinnerDayF);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, emotion_types);
-        spinnerEmotions.setAdapter(spinnerAdapter);
-
         dayTxt = findViewById(R.id.dayText);
         dateTxt = findViewById(R.id.dateText);
         reasonEditText = findViewById(R.id.reasonEditText);
+        addEmotion = findViewById(R.id.addEmotion);
+
+        //FRAGMENT DAY
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, emotion_types);
+        spinnerEmotions.setAdapter(spinnerAdapter);
 
         Calendar calendario = Calendar.getInstance();
         day = calendario.get(Calendar.DAY_OF_MONTH);
@@ -123,8 +128,7 @@ public class Principal extends AppCompatActivity {
         Log.i("YEAR", String.valueOf(year));
         dateTxt.setText(month + "/" + year);
 
-        registrarEmocion = findViewById(R.id.postEmotionButton);
-        registrarEmocion.setOnClickListener(new View.OnClickListener() {
+        addEmotion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -142,7 +146,26 @@ public class Principal extends AppCompatActivity {
 
             }
         });
-    }
+        
+        switch (navigationView.getId()){
+            case R.id.nav_day:
+
+
+                break;
+            case R.id.nav_calendar:
+
+                break;
+            case R.id.nav_graphic:
+
+                break;
+            case R.id.nav_resources:
+
+                break;
+        }
+
+
+        }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
