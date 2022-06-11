@@ -25,11 +25,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.autoregistros.MainActivity;
-import com.example.autoregistros.Principal;
+import com.example.autoregistros.principal.Principal;
 import com.example.autoregistros.R;
-import com.example.autoregistros.conectaAPI.Methods;
 import com.example.autoregistros.entidades.User;
-import com.example.autoregistros.registro.CreateUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;

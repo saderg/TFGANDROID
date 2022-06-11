@@ -14,8 +14,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,16 +34,18 @@ import com.example.autoregistros.entidades.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CreateUser extends AppCompatActivity {
 
     FragmentTransaction transaccion;
     Fragment usernameF, passwordF, emailF, dateOfBirthF;
-    String user_name, password, email_address, date_of_birth;
-    CalendarView calendar;
-    Methods method;
+    String user_name, password, email_address, date_of_birth, dateBirthSpinner;
+
     Context context = this;
+    Spinner spinnerDay, spinnerMonth, spinnerYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +57,8 @@ public class CreateUser extends AppCompatActivity {
         emailF = new EmailFragment();
         dateOfBirthF = new Date_of_birthFragment();
 
-        method = new Methods();
-
         getSupportFragmentManager().beginTransaction().add(R.id.containerFragment, usernameF).commit();
+
 
     }
 
@@ -80,14 +83,41 @@ public class CreateUser extends AppCompatActivity {
                 transaccion.replace(R.id.containerFragment, dateOfBirthF).commit();
                 break;
             case R.id.botonDateOfBirth:
-                EditText date_of_birth_text = findViewById(R.id.editBirth);
 
-                date_of_birth = date_of_birth_text.getText().toString();
+                List<String> arrayDay =  new ArrayList<String>(){{
+                    for (int i = 1; i <=31; i++){
+                        add(i + "");
+                    }
+                }};
+
+                spinnerDay = findViewById(R.id.spinnerDay);
+                ArrayAdapter<String> spinnerAdapterDay = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrayDay);
+                spinnerDay.setAdapter(spinnerAdapterDay);
+
+                String[] arrayMonth = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+                spinnerMonth = findViewById(R.id.spinnerMonth);
+                ArrayAdapter<String> spinnerAdapterMonth = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrayMonth);
+                spinnerDay.setAdapter(spinnerAdapterMonth);
+
+                List<String> arrayYear =  new ArrayList<String>(){{
+                    for (int i = 1920; i <=2004; i++){
+                        add(i + "");
+                    }
+                }};
+                spinnerYear = findViewById(R.id.spinnerYear);
+                ArrayAdapter<String> spinnerAdapterYear = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrayYear);
+                spinnerDay.setAdapter(spinnerAdapterYear);
+
+                dateBirthSpinner = spinnerDay.getSelectedItem().toString() + "/"
+                        + spinnerMonth.getSelectedItem().toString() + "/"
+                        + spinnerYear.getSelectedItem().toString();
+
+                System.out.println("DATEEEEEEEEEEEEEEEE" + dateBirthSpinner);
 
                 Intent intent = new Intent(CreateUser.this, MainActivity.class);
                 startActivity(intent);
 
-                User user = new User(user_name, password, email_address, date_of_birth);
+                User user = new User(user_name, password, email_address, dateBirthSpinner);
                 postUser(user, context);
                 break;
         }

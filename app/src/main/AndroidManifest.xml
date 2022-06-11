@@ -19,7 +19,7 @@
             android:name=".registro.CreateUser"
             android:exported="false" />
         <activity
-            android:name=".Principal"
+            android:name=".principal.Principal"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

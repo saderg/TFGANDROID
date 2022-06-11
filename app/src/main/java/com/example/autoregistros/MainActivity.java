@@ -9,9 +9,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.autoregistros.conectaAPI.Methods;
-import com.example.autoregistros.conectaAPI.Urls;
 import com.example.autoregistros.entidades.Emotion;
 import com.example.autoregistros.entidades.User;
+import com.example.autoregistros.principal.Principal;
 import com.example.autoregistros.registro.CreateUser;
 
 import android.app.AlertDialog;
@@ -23,14 +23,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainActivity extends AppCompatActivity {
 

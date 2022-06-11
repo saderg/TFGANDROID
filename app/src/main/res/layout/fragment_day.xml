@@ -41,7 +41,7 @@
                 android:text="23"
                 android:textAlignment="center"
                 android:textColor="@color/teal_700"
-                android:textSize="220dp"
+                android:textSize="120dp"
                 android:textStyle="bold" />
         </LinearLayout>
 

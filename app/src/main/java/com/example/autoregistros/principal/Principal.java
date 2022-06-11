@@ -1,25 +1,39 @@
-package com.example.autoregistros;
+package com.example.autoregistros.principal;
+
+import static com.example.autoregistros.conectaAPI.Urls.URL_POST_EMOTION;
+import static com.example.autoregistros.conectaAPI.Urls.URL_POST_USER;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.autoregistros.MainActivity;
+import com.example.autoregistros.R;
 import com.example.autoregistros.actualizar.Update;
-import com.example.autoregistros.conectaAPI.Methods;
-import com.example.autoregistros.registro.CreateUser;
+import com.example.autoregistros.databinding.ActivityPrincipalBinding;
+import com.example.autoregistros.entidades.Emotion;
+import com.example.autoregistros.entidades.User;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -27,9 +41,12 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.autoregistros.databinding.ActivityPrincipalBinding;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Principal extends AppCompatActivity {
 
@@ -39,10 +56,12 @@ public class Principal extends AppCompatActivity {
     public TextView userNavMenu, emailNavMenu, dayTxt, dateTxt;
     public Spinner spinnerEmotions;
     AppBarLayout appBarLayout;
+    FloatingActionButton addEmotion;
+
+    public EditText reason_typeEdit = findViewById(R.id.reasonEditText);
 
     int id_user, day, month, year;
-    String user_name, password, email_address, date_of_birth;
-
+    String user_name, password, email_address, date_of_birth, emotion_type, emotion_reason, emotion_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +88,6 @@ public class Principal extends AppCompatActivity {
         System.out.println(email_address);
         System.out.println(date_of_birth);
 
-
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
@@ -82,11 +100,7 @@ public class Principal extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        String[] emotion_types = new String[]{"Miedo", "Alegría", "Enfado", "Tristeza", "Asco", "Sorpresa"};
-
-        spinnerEmotions = findViewById(R.id.spinnerDayF);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, emotion_types);
-        spinnerEmotions.setAdapter(spinnerAdapter);
+        spinnerEmotion();
 
         dayTxt = findViewById(R.id.dayText);
         dateTxt = findViewById(R.id.dateText);
@@ -100,7 +114,13 @@ public class Principal extends AppCompatActivity {
         Log.i("MONTH", String.valueOf(month + 1));
         year = calendario.get(Calendar.YEAR);
         Log.i("YEAR", String.valueOf(year));
-        //dateTxt.setText(month + "/" + year);
+
+
+        emotion_type = spinnerEmotions.getSelectedItem().toString();
+        emotion_reason = reason_typeEdit.getText().toString();
+        emotion_date = dayTxt + "-" + month + "-" + day;
+
+        addEmotion = findViewById(R.id.addEmotion);
 
     }
 
@@ -162,5 +182,61 @@ public class Principal extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    public void spinnerEmotion(){
+        String[] emotion_types = new String[]{"Miedo", "Alegría", "Enfado", "Tristeza", "Asco", "Sorpresa"};
+        spinnerEmotions = findViewById(R.id.spinnerDayF);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, emotion_types);
+        spinnerEmotions.setAdapter(spinnerAdapter);
+    }
+
+    public void postEmotion(Emotion emotion, Context context) {
+
+        System.out.println();
+        final ProgressDialog loading = new ProgressDialog(context);
+        loading.setMessage("Please Wait...");
+        loading.setCanceledOnTouchOutside(false);
+        loading.show();
+
+        Log.i("emotion", emotion.toString());
+        String URL = URL_POST_EMOTION;
+        JSONObject jsonUser = new JSONObject();
+        try {
+            //metemos los valores en el json
+            jsonUser.put("id_usuario", emotion.getId_usuario());
+            jsonUser.put("emotion_type",emotion.getEmotion_type());
+            jsonUser.put("emotion_reason",emotion.getEmotion_reason());
+            jsonUser.put("emotion_date", emotion.getEmotion_date());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        // en la request metemos un json en vez de null
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL , jsonUser,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        aviso();
+                        try {
+                            Log.d("JSON", String.valueOf(response));
+                            loading.dismiss();
+
+                            JSONObject body = response.getJSONObject("body");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            loading.dismiss();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                VolleyLog.d("Error", "Error: " + error.getMessage());
+                Toast.makeText(context,"Ya existe esta emoción",Toast.LENGTH_LONG).show();
+            }
+        });
+        Volley.newRequestQueue(context).add(jsonObjectRequest);
     }
 }
