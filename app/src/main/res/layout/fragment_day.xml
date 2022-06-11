@@ -97,6 +97,12 @@
                     android:gravity="start|top"
                     android:hint="Intenta describir la situación en la que te encuentras, tus pensamientos, tu conducta y los resultados de esta."
                     android:inputType="textMultiLine" />
+
+                <Button
+                    android:id="@+id/postEmotionButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Registrar emoción" />
             </LinearLayout>
 
         </LinearLayout>

@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("password", user.getPassword());
                             intent.putExtra("email_address" , user.getEmail_adress());
                             intent.putExtra("date_of_birth" , user.getDate_of_birth());
+                            Log.i("LOGIN USER INTENT MAIN", user.toString());
                             startActivity(intent);
                         }
                     }catch (Exception ex){
